@@ -15,13 +15,11 @@ namespace Game.Features.Collectibles.Authoring
             public override void Bake(CollectibleHomingAuthoring authoring)
             {
                 Entity collectibleSingletonEntity = GetEntity(TransformUsageFlags.None);
-                AddComponent(collectibleSingletonEntity, new CollectibleHomingRadius
+                AddComponent(collectibleSingletonEntity, new CollectibleHomingSettingsSingleton
                 {
-                    HomingRadius = authoring.pickupRadius
-                });
-                AddComponent(collectibleSingletonEntity, new CollectibleHomingSpeed
-                {
-                    HomingSpeed = authoring.pickupAttractionSpeed
+                    Speed = authoring.pickupAttractionSpeed,
+                    AcquireRadius = authoring.pickupRadius,
+                    CompleteRadius = 0.01f
                 });
             }
         }

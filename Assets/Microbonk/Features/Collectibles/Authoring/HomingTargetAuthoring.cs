@@ -11,7 +11,7 @@ namespace Game.Features.Collectibles.Authoring
             public override void Bake(HomingTargetAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new CollectibleHomingTargetTag());
+                AddComponent(entity, new HomingTargetTag());
             }
         }
     }

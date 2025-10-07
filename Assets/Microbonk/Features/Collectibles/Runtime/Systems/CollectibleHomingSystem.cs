@@ -19,17 +19,16 @@ namespace Game.Features.Collectibles.Runtime.Systems
         public void OnCreate(ref SystemState state)
         {
             this.homingTargetQuery = new EntityQueryBuilder(Allocator.Temp)
-                .WithAll<CollectibleHomingTargetTag, LocalTransform>()
+                .WithAll<HomingTargetTag, LocalTransform>()
                 .Build(ref state);
+            
 
-            state.RequireForUpdate<CollectibleHomingRadius>();
-            state.RequireForUpdate<CollectibleHomingSpeed>();
+            state.RequireForUpdate<CollectibleHomingSettingsSingleton>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            float radius = SystemAPI.GetSingleton<CollectibleHomingRadius>().HomingRadius;
-            float speed = SystemAPI.GetSingleton<CollectibleHomingSpeed>().HomingSpeed;
+            var (speed, acquireRadius, completeRadius) = SystemAPI.GetSingleton<CollectibleHomingSettingsSingleton>();
 
             var foundHomingTargets =
                 this.homingTargetQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
@@ -37,7 +36,7 @@ namespace Game.Features.Collectibles.Runtime.Systems
             new HomingJob
                 {
                     HomingTargets = foundHomingTargets,
-                    Radius = radius,
+                    Radius = acquireRadius,
                     Speed = speed,
                     DeltaTime = SystemAPI.Time.DeltaTime
                 }

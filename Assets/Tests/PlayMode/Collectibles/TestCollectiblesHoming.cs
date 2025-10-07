@@ -50,7 +50,7 @@ public class TestCollectiblesHoming : ECSTestsFixture
 
     private void CreateHomingTarget(float3 position)
     {
-        Entity target = this.Manager.CreateEntity(typeof(CollectibleHomingTargetTag));
+        Entity target = this.Manager.CreateEntity(typeof(HomingTargetTag));
         this.Manager.AddComponentData(target, new LocalTransform { Position = position });
     }
 
@@ -58,8 +58,8 @@ public class TestCollectiblesHoming : ECSTestsFixture
     {
         Entity collectible = this.Manager.CreateEntity(typeof(CollectibleTag));
         this.Manager.AddComponentData(collectible, new LocalTransform { Position = position });
-        this.Manager.AddComponentData(collectible, new CollectibleHomingRadius { HomingRadius = 10 });
-        this.Manager.AddComponentData(collectible, new CollectibleHomingSpeed { HomingSpeed = 1 });
+        this.Manager.AddComponentData(collectible,
+            new CollectibleHomingSettingsSingleton { AcquireRadius = 10, Speed = 1 });
         return collectible;
     }
 }
