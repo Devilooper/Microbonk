@@ -1,9 +1,11 @@
 using NUnit.Framework;
+using Unity.Core;
 using Unity.Entities;
 using Unity.Jobs.LowLevel.Unsafe;
 using UnityEngine.LowLevel;
 
 // Based on https://github.com/needle-mirror/com.unity.entities/blob/master/Unity.Entities.Tests/ECSTestsFixture.cs
+// and https://gamedev.center/unit-testing-made-easy-unity-ecs-best-practices/
 public abstract class ECSTestsFixture
 {
     protected World World;
@@ -13,10 +15,29 @@ public abstract class ECSTestsFixture
     private World PreviousWorld;
     private PlayerLoopSystem PreviousPlayerLoop;
     private bool JobsDebuggerWasEnabled;
+    private double lastTickTime = 0;
 
+
+    protected void UpdateSystem<T>() where T : unmanaged, ISystem =>
+        this.World.GetExistingSystem<T>().Update(this.World.Unmanaged);
+
+    protected SystemHandle CreateSystem<T>() where T : unmanaged, ISystem => this.World.CreateSystem<T>();
+
+    protected Entity CreateEntity(params ComponentType[] types) => this.Manager.CreateEntity(types);
+
+
+    /// <summary>
+    ///     Useful if testing system that updates entities based on SystemAPI.Time.DeltaTime
+    /// </summary>
+    /// <param name="deltaTime"></param>
+    protected void AdvanceWorldTime(float deltaTime = 0.2f)
+    {
+        this.World.SetTime(new TimeData(this.lastTickTime, deltaTime: deltaTime));
+        this.lastTickTime += deltaTime;
+    }
 
     [SetUp]
-    public void Setup()
+    public virtual void Setup()
     {
         // unit tests preserve the current player loop to restore later, and start from a blank slate.
         this.PreviousPlayerLoop = PlayerLoop.GetCurrentPlayerLoop();
@@ -42,7 +63,7 @@ public abstract class ECSTestsFixture
     }
 
     [TearDown]
-    public void TearDown()
+    public virtual void TearDown()
     {
         if (this.World != null && this.World.IsCreated)
         {

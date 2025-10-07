@@ -31,7 +31,8 @@ namespace Game.Features.Collectibles.Runtime.Systems
             float radius = SystemAPI.GetSingleton<CollectibleHomingRadius>().HomingRadius;
             float speed = SystemAPI.GetSingleton<CollectibleHomingSpeed>().HomingSpeed;
 
-            var foundHomingTargets = this.homingTargetQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
+            var foundHomingTargets =
+                this.homingTargetQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
 
             new HomingJob
                 {
@@ -54,13 +55,12 @@ namespace Game.Features.Collectibles.Runtime.Systems
             public float Speed;
             public float DeltaTime;
 
-            public void Execute(ref LocalTransform collectibleTransform)
+            private void Execute(ref LocalTransform collectibleTransform)
             {
                 foreach (LocalTransform homingTarget in this.HomingTargets)
                 {
                     float3 toTarget = homingTarget.Position - collectibleTransform.Position;
                     float distance = math.length(toTarget);
-
                     if (distance <= this.Radius)
                     {
                         collectibleTransform.Position += toTarget * this.Speed * this.DeltaTime;

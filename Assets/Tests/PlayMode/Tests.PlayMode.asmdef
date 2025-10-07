@@ -4,7 +4,12 @@
     "references": [
         "UnityEngine.TestRunner",
         "UnityEditor.TestRunner",
-        "Tests.Commons"
+        "Unity.Entities",
+        "Unity.Collections",
+        "Unity.Transforms",
+        "Unity.Mathematics",
+        "Tests.Commons",
+        "Collectibles.Runtime"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
