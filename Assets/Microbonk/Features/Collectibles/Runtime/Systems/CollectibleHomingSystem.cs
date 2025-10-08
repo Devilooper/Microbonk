@@ -44,33 +44,38 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
 
             this.targetsPositions.Update(ref state);
 
-            var ecnSystem = state.World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
-            var ecb = ecnSystem.CreateCommandBuffer().AsParallelWriter();
+            var endSim = state.World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
+
+            var ecbAcquire = endSim.CreateCommandBuffer().AsParallelWriter();
+            var ecbMove = endSim.CreateCommandBuffer().AsParallelWriter();
+            var ecbDestroy = endSim.CreateCommandBuffer().AsParallelWriter();
 
             var acquireHandle = new AcquireTargetJob
             {
                 TargetEntities = targetEntities,
                 TargetTransforms = targetTransforms,
                 AcquireRadiusSq = acquireRadius * acquireRadius,
-                Ecb = ecb
+                Ecb = ecbAcquire
             }.ScheduleParallel(state.Dependency);
-            ecnSystem.AddJobHandleForProducer(acquireHandle);
-            
+            endSim.AddJobHandleForProducer(acquireHandle);
+
             var moveHandle = new MoveAndMarkCollectedJob
             {
                 TargetLT = this.targetsPositions,
                 Speed = speed,
                 CompleteRadius = completeRadius,
                 DeltaTime = SystemAPI.Time.DeltaTime,
-                Ecb = ecb
+                Ecb = ecbMove
             }.ScheduleParallel(acquireHandle);
-            ecnSystem.AddJobHandleForProducer(moveHandle);
+            endSim.AddJobHandleForProducer(moveHandle);
 
-            // var destroyHandle = new DestroyJob
-            // {
-            //     Ecb = ecb
-            // }.ScheduleParallel(moveHandle);
-            // ecnSystem.AddJobHandleForProducer(destroyHandle);
+            var destroyHandle = new DestroyJob
+            {
+                Ecb = ecbDestroy
+            }.ScheduleParallel(moveHandle);
+            endSim.AddJobHandleForProducer(destroyHandle);
+
+            state.Dependency = destroyHandle;
         }
     }
 }
