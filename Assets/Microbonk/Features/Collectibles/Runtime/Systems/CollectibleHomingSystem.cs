@@ -46,8 +46,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
 
             var endSim = state.World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
 
-            var ecbAcquire = endSim.CreateCommandBuffer().AsParallelWriter();
-            var ecbMove = endSim.CreateCommandBuffer().AsParallelWriter();
+            var ecbSimulate = endSim.CreateCommandBuffer().AsParallelWriter();
             var ecbDestroy = endSim.CreateCommandBuffer().AsParallelWriter();
 
             var acquireHandle = new AcquireTargetJob
@@ -55,7 +54,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
                 TargetEntities = targetEntities,
                 TargetTransforms = targetTransforms,
                 AcquireRadiusSq = acquireRadius * acquireRadius,
-                Ecb = ecbAcquire
+                Ecb = ecbSimulate
             }.ScheduleParallel(state.Dependency);
             endSim.AddJobHandleForProducer(acquireHandle);
 
@@ -65,7 +64,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
                 Speed = speed,
                 CompleteRadius = completeRadius,
                 DeltaTime = SystemAPI.Time.DeltaTime,
-                Ecb = ecbMove
+                Ecb = ecbSimulate
             }.ScheduleParallel(acquireHandle);
             endSim.AddJobHandleForProducer(moveHandle);
 
