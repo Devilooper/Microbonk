@@ -15,10 +15,8 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
     public partial struct CollectibleHomingSystem : ISystem
     {
         private EntityQuery homingTargetsQuery;
-
         [ReadOnly] private ComponentLookup<LocalToWorld> targetsPositions;
-        // ^^^^^ isn't LocalTransform too broad? can I / should I restrict it to targets specifically?
-
+        
         public void OnCreate(ref SystemState state)
         {
             this.homingTargetsQuery = new EntityQueryBuilder(Allocator.Temp)
@@ -60,7 +58,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
 
             var moveHandle = new MoveAndMarkCollectedJob
             {
-                TargetLT = this.targetsPositions,
+                TargetPositions = this.targetsPositions,
                 Speed = speed,
                 CompleteRadius = completeRadius,
                 DeltaTime = SystemAPI.Time.DeltaTime,

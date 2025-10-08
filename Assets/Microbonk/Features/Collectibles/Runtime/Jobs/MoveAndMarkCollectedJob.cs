@@ -15,7 +15,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Jobs
     {
         public EntityCommandBuffer.ParallelWriter Ecb;
 
-        [ReadOnly] public ComponentLookup<LocalToWorld> TargetLT;
+        [ReadOnly] public ComponentLookup<LocalToWorld> TargetPositions;
         public float Speed;
         public float CompleteRadius;
         public float DeltaTime;
@@ -24,7 +24,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Jobs
             [ChunkIndexInQuery] int index, Entity collectibleEntity,
             ref LocalTransform collectibleTransform, in HomingTowardsTarget homingTarget)
         {
-            float3 targetPos = this.TargetLT[homingTarget.Target].Position;
+            float3 targetPos = this.TargetPositions[homingTarget.Target].Position;
             float3 d = targetPos - collectibleTransform.Position;
             float dist = math.length(d);
             
