@@ -1,5 +1,6 @@
-using Game.Features.Collectibles.Runtime.Components.Homing;
-using Game.Features.Collectibles.Runtime.Systems;
+using Microbonk.Features.Collectibles.Runtime.Components;
+using Microbonk.Features.Collectibles.Runtime.Components.Homing;
+using Microbonk.Features.Collectibles.Runtime.Systems;
 using NUnit.Framework;
 using Unity.Entities;
 using Unity.Mathematics;

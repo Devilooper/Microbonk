@@ -1,5 +1,8 @@
 using Unity.Entities;
 
-public struct CollectibleTag : IComponentData
+namespace Microbonk.Features.Collectibles.Runtime.Components
 {
+    public struct CollectibleTag : IComponentData
+    {
+    }
 }

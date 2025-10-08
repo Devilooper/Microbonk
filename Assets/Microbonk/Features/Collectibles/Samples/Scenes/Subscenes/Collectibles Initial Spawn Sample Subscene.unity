@@ -294,8 +294,12 @@ PrefabInstance:
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 6873187512990305344, guid: 048016cff3e85b54680b13bc4d788757, type: 3}
+      propertyPath: completeRadius
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 6873187512990305344, guid: 048016cff3e85b54680b13bc4d788757, type: 3}
       propertyPath: pickupAttractionSpeed
-      value: 3
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7510230207160227255, guid: 048016cff3e85b54680b13bc4d788757, type: 3}
       propertyPath: m_LocalPosition.x

@@ -1,15 +1,19 @@
+using Microbonk.Features.Collectibles.Runtime.Components;
 using Unity.Entities;
 using UnityEngine;
 
-[DisallowMultipleComponent]
-public sealed class CollectibleAuthoring : MonoBehaviour
+namespace Microbonk.Features.Collectibles.Authoring
 {
-    private sealed class CollectibleBaker : Baker<CollectibleAuthoring>
+    [DisallowMultipleComponent]
+    public sealed class CollectibleAuthoring : MonoBehaviour
     {
-        public override void Bake(CollectibleAuthoring authoring)
+        private sealed class CollectibleBaker : Baker<CollectibleAuthoring>
         {
-            Entity collectibleEntity = GetEntity(TransformUsageFlags.Dynamic);
-            AddComponent<CollectibleTag>(collectibleEntity);
+            public override void Bake(CollectibleAuthoring authoring)
+            {
+                Entity collectibleEntity = GetEntity(TransformUsageFlags.Dynamic);
+                AddComponent<CollectibleTag>(collectibleEntity);
+            }
         }
     }
 }

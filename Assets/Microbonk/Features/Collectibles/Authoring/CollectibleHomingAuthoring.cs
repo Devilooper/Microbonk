@@ -1,14 +1,16 @@
-using Game.Features.Collectibles.Runtime.Components.Homing;
+using Microbonk.Features.Collectibles.Runtime.Components.Homing;
 using Unity.Entities;
 using UnityEngine;
 
-namespace Game.Features.Collectibles.Authoring
+namespace Microbonk.Features.Collectibles.Authoring
 {
     [DisallowMultipleComponent]
     public class CollectibleHomingAuthoring : MonoBehaviour
     {
         [SerializeField] [Min(0f)] private float pickupRadius = 2;
+        [SerializeField] [Min(0f)] private float completeRadius = 0.1f;
         [SerializeField] [Min(0f)] private float pickupAttractionSpeed = 10f;
+        
 
         private class CollectibleHomingBaker : Baker<CollectibleHomingAuthoring>
         {
@@ -19,7 +21,7 @@ namespace Game.Features.Collectibles.Authoring
                 {
                     Speed = authoring.pickupAttractionSpeed,
                     AcquireRadius = authoring.pickupRadius,
-                    CompleteRadius = 0.01f
+                    CompleteRadius = authoring.completeRadius
                 });
             }
         }

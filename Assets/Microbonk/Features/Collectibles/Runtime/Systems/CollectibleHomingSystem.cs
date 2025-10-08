@@ -1,71 +1,76 @@
-using Game.Features.Collectibles.Runtime.Components.Homing;
+using Microbonk.Features.Collectibles.Runtime.Components;
+using Microbonk.Features.Collectibles.Runtime.Components.Homing;
+using Microbonk.Features.Collectibles.Runtime.Jobs;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
-using Unity.Mathematics;
 using Unity.Transforms;
 
-namespace Game.Features.Collectibles.Runtime.Systems
+namespace Microbonk.Features.Collectibles.Runtime.Systems
 {
     /// <summary>
     ///     Moves collectible towards player if in range
     /// </summary>
     [BurstCompile]
-    [WithAll(typeof(CollectibleTag))]
     public partial struct CollectibleHomingSystem : ISystem
     {
-        private EntityQuery homingTargetQuery;
+        private EntityQuery homingTargetsQuery;
+
+        [ReadOnly] private ComponentLookup<LocalToWorld> targetsPositions;
+        // ^^^^^ isn't LocalTransform too broad? can I / should I restrict it to targets specifically?
 
         public void OnCreate(ref SystemState state)
         {
-            this.homingTargetQuery = new EntityQueryBuilder(Allocator.Temp)
-                .WithAll<HomingTargetTag, LocalTransform>()
+            this.homingTargetsQuery = new EntityQueryBuilder(Allocator.Temp)
+                .WithAll<HomingTargetTag, LocalToWorld>()
                 .Build(ref state);
-            
 
+            this.targetsPositions = state.GetComponentLookup<LocalToWorld>(isReadOnly: true);
+
+            state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CollectibleHomingSettingsSingleton>();
+            state.RequireForUpdate<CollectibleTag>();
+            state.RequireForUpdate<LocalTransform>();
+            state.RequireForUpdate(this.homingTargetsQuery);
         }
 
         public void OnUpdate(ref SystemState state)
         {
             var (speed, acquireRadius, completeRadius) = SystemAPI.GetSingleton<CollectibleHomingSettingsSingleton>();
 
-            var foundHomingTargets =
-                this.homingTargetQuery.ToComponentDataArray<LocalTransform>(state.WorldUpdateAllocator);
+            var targetEntities = this.homingTargetsQuery.ToEntityArray(state.WorldUpdateAllocator);
+            var targetTransforms =
+                this.homingTargetsQuery.ToComponentDataArray<LocalToWorld>(state.WorldUpdateAllocator);
 
-            new HomingJob
-                {
-                    HomingTargets = foundHomingTargets,
-                    Radius = acquireRadius,
-                    Speed = speed,
-                    DeltaTime = SystemAPI.Time.DeltaTime
-                }
-                .ScheduleParallel();
-            foundHomingTargets.Dispose();
-        }
+            this.targetsPositions.Update(ref state);
 
+            var ecnSystem = state.World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
+            var ecb = ecnSystem.CreateCommandBuffer().AsParallelWriter();
 
-        [BurstCompile]
-        [WithAll(typeof(CollectibleTag))]
-        public partial struct HomingJob : IJobEntity
-        {
-            [ReadOnly] public NativeArray<LocalTransform> HomingTargets;
-            public float Radius;
-            public float Speed;
-            public float DeltaTime;
-
-            private void Execute(ref LocalTransform collectibleTransform)
+            var acquireHandle = new AcquireTargetJob
             {
-                foreach (LocalTransform homingTarget in this.HomingTargets)
-                {
-                    float3 toTarget = homingTarget.Position - collectibleTransform.Position;
-                    float distance = math.length(toTarget);
-                    if (distance <= this.Radius)
-                    {
-                        collectibleTransform.Position += toTarget * this.Speed * this.DeltaTime;
-                    }
-                }
-            }
+                TargetEntities = targetEntities,
+                TargetTransforms = targetTransforms,
+                AcquireRadiusSq = acquireRadius * acquireRadius,
+                Ecb = ecb
+            }.ScheduleParallel(state.Dependency);
+            ecnSystem.AddJobHandleForProducer(acquireHandle);
+            
+            var moveHandle = new MoveAndMarkCollectedJob
+            {
+                TargetLT = this.targetsPositions,
+                Speed = speed,
+                CompleteRadius = completeRadius,
+                DeltaTime = SystemAPI.Time.DeltaTime,
+                Ecb = ecb
+            }.ScheduleParallel(acquireHandle);
+            ecnSystem.AddJobHandleForProducer(moveHandle);
+
+            // var destroyHandle = new DestroyJob
+            // {
+            //     Ecb = ecb
+            // }.ScheduleParallel(moveHandle);
+            // ecnSystem.AddJobHandleForProducer(destroyHandle);
         }
     }
 }

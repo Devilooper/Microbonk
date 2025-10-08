@@ -2,7 +2,7 @@ using Unity.Entities;
 
 namespace Microbonk.Features.Collectibles.Runtime.Components.Homing
 {
-    public struct HomingTargetTag : IComponentData
+    public struct DestroyMe : IComponentData
     {
     }
 }

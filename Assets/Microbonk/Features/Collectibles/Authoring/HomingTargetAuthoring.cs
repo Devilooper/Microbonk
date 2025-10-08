@@ -1,8 +1,8 @@
-using Game.Features.Collectibles.Runtime.Components.Homing;
+using Microbonk.Features.Collectibles.Runtime.Components.Homing;
 using Unity.Entities;
 using UnityEngine;
 
-namespace Game.Features.Collectibles.Authoring
+namespace Microbonk.Features.Collectibles.Authoring
 {
     public class HomingTargetAuthoring : MonoBehaviour
     {
