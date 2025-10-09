@@ -25,6 +25,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
 
             this.targetsPositions = state.GetComponentLookup<LocalToWorld>(isReadOnly: true);
 
+            // todo this can be done idiomatically now
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CollectibleHomingSettingsSingleton>();
             state.RequireForUpdate<CollectibleTag>();
@@ -42,10 +43,11 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
 
             this.targetsPositions.Update(ref state);
 
+            // todo this can be done idiomatically now
             var endSim = state.World.GetOrCreateSystemManaged<EndSimulationEntityCommandBufferSystem>();
 
             var ecbSimulate = endSim.CreateCommandBuffer().AsParallelWriter();
-            var ecbDestroy = endSim.CreateCommandBuffer().AsParallelWriter();
+            // var ecbDestroy = endSim.CreateCommandBuffer().AsParallelWriter();
 
             var acquireHandle = new AcquireTargetJob
             {
@@ -66,13 +68,13 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
             }.ScheduleParallel(acquireHandle);
             endSim.AddJobHandleForProducer(moveHandle);
 
-            var destroyHandle = new DestroyJob
-            {
-                Ecb = ecbDestroy
-            }.ScheduleParallel(moveHandle);
-            endSim.AddJobHandleForProducer(destroyHandle);
+            // var destroyHandle = new DestroyJob
+            // {
+            //     Ecb = ecbDestroy
+            // }.ScheduleParallel(moveHandle);
+            // endSim.AddJobHandleForProducer(destroyHandle);
 
-            state.Dependency = destroyHandle;
+            // state.Dependency = destroyHandle;
         }
     }
 }

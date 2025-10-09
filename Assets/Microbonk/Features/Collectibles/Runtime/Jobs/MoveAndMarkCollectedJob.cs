@@ -11,6 +11,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Jobs
     /// This Job has two responsibilities as to avoid multiple iterations over the same data
     [BurstCompile]
     [WithAll(typeof(CollectibleTag), typeof(HomingTowardsTarget))]
+    [UpdateInGroup(typeof(SimulationSystemGroup))]
     public partial struct MoveAndMarkCollectedJob : IJobEntity
     {
         public EntityCommandBuffer.ParallelWriter Ecb;
