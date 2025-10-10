@@ -44,5 +44,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab82f7ec449f4aeca6a3cecca629e887, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Collectibles.Authoring::Game.Features.Collectibles.Authoring.CollectibleHomingAuthoring
-  pickupRadius: 2
+  pickupRadius: 5
+  completeRadius: 2
   pickupAttractionSpeed: 10
