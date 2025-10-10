@@ -18,9 +18,8 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
             var ecbSingleton =
                 SystemAPI.GetSingleton<EndSimulationEntityCommandBufferSystem.Singleton>();
             EntityCommandBuffer ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
-            
-            
-            foreach ((var lifetimeRef, Entity effect) in SystemAPI
+
+            foreach ((var lifetimeRef, Entity entity) in SystemAPI
                          .Query<RefRW<ProjectileLifetime>>()
                          .WithEntityAccess())
             {
@@ -28,7 +27,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
                 lifetime.SecondsRemaining -= SystemAPI.Time.DeltaTime;
                 if (lifetime.SecondsRemaining <= 0f)
                 {
-                    ecb.DestroyEntity(effect);
+                    ecb.DestroyEntity(entity);
                 }
             }
         }
