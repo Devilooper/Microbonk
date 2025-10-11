@@ -53,6 +53,7 @@ public class TestCollectiblesHoming : ECSTestsFixture
     {
         Entity target = this.Manager.CreateEntity(typeof(HomingTargetTag));
         this.Manager.AddComponentData(target, new LocalTransform { Position = position });
+        this.Manager.AddComponentData(target, new LocalToWorld(){});
     }
 
     private Entity CreateCollectible(float3 position)
