@@ -34,6 +34,7 @@ public abstract class ECSTestsFixture
     {
         this.World.SetTime(new TimeData(this.lastTickTime, deltaTime: deltaTime));
         this.lastTickTime += deltaTime;
+        this.World.Update();
     }
 
     [SetUp]
@@ -44,7 +45,7 @@ public abstract class ECSTestsFixture
         PlayerLoop.SetPlayerLoop(PlayerLoop.GetDefaultPlayerLoop());
 
         this.PreviousWorld = World.DefaultGameObjectInjectionWorld;
-        this.World = World.DefaultGameObjectInjectionWorld = new World("Test World");
+        this.World = DefaultWorldInitialization.Initialize("Test World");
         this.World.UpdateAllocatorEnableBlockFree = true;
         this.Manager = this.World.EntityManager;
         this.ManagerDebug = new EntityManager.EntityManagerDebug(this.Manager);
