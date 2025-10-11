@@ -33,7 +33,6 @@ namespace Microbonk.Features.Collectibles.Samples.Scripts
         public float Radius;
     }
 
-
     [BurstCompile]
     [WithAll(typeof(CharacterMovementSampleComponentData))]
     public partial struct CharacterMovementSampleSystem : ISystem

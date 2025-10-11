@@ -8,9 +8,6 @@ using Unity.Transforms;
 
 namespace Microbonk.Features.Collectibles.Runtime.Systems
 {
-    /// <summary>
-    ///     Moves collectible towards player if in range
-    /// </summary>
     [BurstCompile]
     public partial struct CollectibleHomingSystem : ISystem
     {
