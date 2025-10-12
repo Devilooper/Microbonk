@@ -119,55 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &725100920
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 725100921}
-  - component: {fileID: 725100922}
-  m_Layer: 0
-  m_Name: Projectile Spawner Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &725100921
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725100920}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &725100922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725100920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdaf38bd1a14d19bdcfe7be76f9fb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Projectiles.Authoring::Microbonk.Features.Projectiles.Authoring.ProjectileSpawnerAuthoring
-  RotateAround: {fileID: 1987636991137526434}
-  ProjectileToSpawn: {fileID: 446528278844137107, guid: 8ef0b12e257e3294cbfa38165255ad27, type: 3}
-  SpawnerAngularSpeed: 10
-  SpawnerRadius: 2
-  IntervalSeconds: 0.1
 --- !u!1001 &1387667319
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -247,91 +198,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Microbonk.Features.Collectibles.Samples.Scripts.CharacterMovementSampleAuthoring
   speed: 1
   radius: 5
---- !u!4 &1387667325 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3929162580520387977, guid: a2ac34c7b199ee44a9955e196aaf4c77, type: 3}
-  m_PrefabInstance: {fileID: 1387667319}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &1848914800
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1848914801}
-  m_Layer: 0
-  m_Name: ----- PROJECTILES
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1848914801
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1848914800}
-  serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1917179709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1917179711}
-  - component: {fileID: 1917179710}
-  m_Layer: 0
-  m_Name: Projectile Spawner Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1917179710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917179709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdaf38bd1a14d19bdcfe7be76f9fb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Projectiles.Authoring::Microbonk.Features.Projectiles.Authoring.ProjectileSpawnerAuthoring
-  RotateAround: {fileID: 1387667325}
-  ProjectileToSpawn: {fileID: 446528278844137107, guid: 8ef0b12e257e3294cbfa38165255ad27, type: 3}
-  SpawnerAngularSpeed: -10
-  SpawnerRadius: 2
-  IntervalSeconds: 0
---- !u!4 &1917179711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917179709}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1969096316
 GameObject:
   m_ObjectHideFlags: 0
@@ -473,11 +339,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Microbonk.Features.Collectibles.Samples.Scripts.CharacterMovementSampleAuthoring
   speed: -1
   radius: 5
---- !u!4 &1987636991137526434 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3929162580520387977, guid: a2ac34c7b199ee44a9955e196aaf4c77, type: 3}
-  m_PrefabInstance: {fileID: 1987636991137526431}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2349575317318845920
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -589,7 +450,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6945856490790760941, guid: c15c2fbfff489aa4086e80fc6f515787, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -606,6 +467,3 @@ SceneRoots:
   - {fileID: 1993441188}
   - {fileID: 2349575317318845920}
   - {fileID: 4609619491372338916}
-  - {fileID: 1848914801}
-  - {fileID: 725100921}
-  - {fileID: 1917179711}
