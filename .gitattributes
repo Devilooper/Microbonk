@@ -1,2 +1,14 @@
-*.meta linguist-generated
+# For line ending normalization between Unix and Windows
+* text=auto
+
+# Unity 
 *.cs diff=csharp text
+*.cginc text
+*.shader text
+
+# Collapse Unity-generated files on GitHub
+*.asset linguist-generated
+*.mat linguist-generated
+*.meta linguist-generated
+*.prefab linguist-generated
+*.unity linguist-generated
