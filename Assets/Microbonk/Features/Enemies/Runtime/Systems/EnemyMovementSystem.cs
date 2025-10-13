@@ -40,11 +40,7 @@ namespace Microbonk.Features.Enemies.Runtime.Systems
                 {
                     Position = enemyTransform.ValueRO.Position,
                     MaxDistance = detectionSettings.ValueRO.DetectionDistance,
-                    Filter = new CollisionFilter
-                    {
-                        BelongsTo = CollisionFilter.Default.BelongsTo,
-                        CollidesWith = detectionSettings.ValueRO.DetectionFilter.Value
-                    },
+                    Filter = detectionSettings.ValueRO.CollisionFilter
                 };
                 physicsWorld.CalculateDistance(distInput, ref hitsCollector);
 

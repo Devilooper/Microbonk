@@ -14,23 +14,7 @@ namespace Microbonk.Features.Enemies.Runtime.Jobs
 
         public void Execute(ref ThirdPersonCharacterControl  characterControl, in EnemyDetectionSettings detectionSettings, in  LocalTransform localTransform )
         {
-            NativeList<DistanceHit> distanceHits = new NativeList<DistanceHit>(Allocator.Temp);
-            
-            AllHitsCollector<DistanceHit> hitsCollector =
-                new AllHitsCollector<DistanceHit>(detectionSettings.DetectionDistance, ref distanceHits);
-            
-            PointDistanceInput distInput = new PointDistanceInput
-            {
-                Position = localTransform.Position,
-                MaxDistance = detectionSettings.DetectionDistance,
-                Filter = new CollisionFilter
-                {
-                    BelongsTo = CollisionFilter.Default.BelongsTo,
-                    CollidesWith = detectionSettings.DetectionFilter.Value
-                },
-            };
-            
-            this.PhysicsWorld.CalculateDistance(distInput, ref hitsCollector);
+     
         }
     }
 }
