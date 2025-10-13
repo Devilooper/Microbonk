@@ -17,7 +17,7 @@ namespace Microbonk.Features.Enemies.Authoring
             public override void Bake(EnemyAuthoring authoring)
             {
                 var entity = GetEntity(TransformUsageFlags.Dynamic);
-                AddComponent(entity, new EnemyDetectionSettings
+                AddSharedComponent(entity, new EnemyDetectionSettings
                 {
                     DetectionDistance = authoring.DetectionDistance,
                     CollisionFilter = new CollisionFilter
