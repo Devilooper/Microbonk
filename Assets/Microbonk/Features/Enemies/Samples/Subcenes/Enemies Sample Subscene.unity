@@ -538,6 +538,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy Movement Target 2
       objectReference: {fileID: 0}
+    - target: {fileID: 8324276159917004287, guid: 460eac574a90b0d4785c4e4d78051407, type: 3}
+      propertyPath: m_Material.m_BelongsToCategories.m_Value.Category02
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8339228471847911647, guid: 460eac574a90b0d4785c4e4d78051407, type: 3}
       propertyPath: 'm_Materials.Array.data[0]'
       value: 
