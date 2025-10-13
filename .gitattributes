@@ -2,6 +2,7 @@
 * text=auto
 
 # Unity 
+*.asmdef linguist-language=json
 *.cs diff=csharp text
 *.cginc text
 *.shader text
