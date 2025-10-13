@@ -9,19 +9,21 @@ namespace Microbonk.Features.Enemies.Runtime.Systems
     [BurstCompile]
     public partial struct EnemyMovementSystem : ISystem
     {
+        private ComponentLookup<LocalTransform> targetTransformLookup;
+
         public void OnCreate(ref SystemState state)
         {
+            this.targetTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true);
             state.RequireForUpdate<PhysicsWorldSingleton>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
-            PhysicsWorld physicsWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().PhysicsWorld;
-
+            this.targetTransformLookup.Update(ref state);
             new EnemyMovementJob
                 {
-                    PhysicsWorld = physicsWorld,
-                    TargetTransformLookup = SystemAPI.GetComponentLookup<LocalTransform>(true)
+                    CollisionWorld = SystemAPI.GetSingleton<PhysicsWorldSingleton>().CollisionWorld,
+                    TargetTransformLookup = this.targetTransformLookup
                 }
                 .ScheduleParallel();
         }

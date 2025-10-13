@@ -11,7 +11,7 @@ namespace Microbonk.Features.Enemies.Runtime.Jobs
     [BurstCompile]
     public partial struct EnemyMovementJob : IJobEntity
     {
-        [ReadOnly] public PhysicsWorld PhysicsWorld;
+        [ReadOnly] public CollisionWorld CollisionWorld;
         [ReadOnly] public ComponentLookup<LocalTransform> TargetTransformLookup;
 
         private void Execute(ref ThirdPersonCharacterControl enemyControl,
@@ -28,7 +28,7 @@ namespace Microbonk.Features.Enemies.Runtime.Jobs
                 MaxDistance = detectionSettings.DetectionDistance,
                 Filter = detectionSettings.CollisionFilter
             };
-            this.PhysicsWorld.CalculateDistance(distInput, ref hitsCollector);
+            this.CollisionWorld.CalculateDistance(distInput, ref hitsCollector);
 
             Entity selectedTarget = Entity.Null;
             float closestDistanceSq = float.MaxValue;
