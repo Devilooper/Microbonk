@@ -119,55 +119,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &725100920
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 725100921}
-  - component: {fileID: 725100922}
-  m_Layer: 0
-  m_Name: Projectile Spawner Right
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &725100921
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725100920}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &725100922
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 725100920}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdaf38bd1a14d19bdcfe7be76f9fb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Projectiles.Authoring::Microbonk.Features.Projectiles.Authoring.ProjectileSpawnerAuthoring
-  RotateAround: {fileID: 1056822714}
-  ProjectileToSpawn: {fileID: 446528278844137107, guid: 8ef0b12e257e3294cbfa38165255ad27, type: 3}
-  SpawnerAngularSpeed: 10
-  SpawnerRadius: 2
-  IntervalSeconds: 0.1
 --- !u!1001 &1056822713
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -230,6 +181,79 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6374140872127254915, guid: af3550dfa91aae34c9e2a9086252327a, type: 3}
   m_PrefabInstance: {fileID: 1056822713}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &1688921844
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5496552753445079765, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_Name
+      value: Projectile Spawner Right
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179949064293124754, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: RotateAround
+      value: 
+      objectReference: {fileID: 1056822714}
+    - target: {fileID: 9179949064293124754, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: SpawnerRadius
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179949064293124754, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: IntervalSeconds
+      value: 0.1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179949064293124754, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: SpawnerAngularSpeed
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 298157b9c725d4344973b603631f5aad, type: 3}
 --- !u!1 &1848914800
 GameObject:
   m_ObjectHideFlags: 0
@@ -255,55 +279,6 @@ Transform:
   m_GameObject: {fileID: 1848914800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &1917179709
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1917179711}
-  - component: {fileID: 1917179710}
-  m_Layer: 0
-  m_Name: Projectile Spawner Left
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &1917179710
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917179709}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffdaf38bd1a14d19bdcfe7be76f9fb18, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Projectiles.Authoring::Microbonk.Features.Projectiles.Authoring.ProjectileSpawnerAuthoring
-  RotateAround: {fileID: 6942839025524266643}
-  ProjectileToSpawn: {fileID: 446528278844137107, guid: 8ef0b12e257e3294cbfa38165255ad27, type: 3}
-  SpawnerAngularSpeed: -10
-  SpawnerRadius: 2
-  IntervalSeconds: 0
---- !u!4 &1917179711
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1917179709}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -341,6 +316,67 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5817171167431796196
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5496552753445079765, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_Name
+      value: Projectile Spawner Left
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8324668759834883120, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9179949064293124754, guid: 298157b9c725d4344973b603631f5aad, type: 3}
+      propertyPath: RotateAround
+      value: 
+      objectReference: {fileID: 6942839025524266643}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 298157b9c725d4344973b603631f5aad, type: 3}
 --- !u!1001 &6942839025524266642
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -411,5 +447,5 @@ SceneRoots:
   - {fileID: 6942839025524266642}
   - {fileID: 1056822713}
   - {fileID: 1848914801}
-  - {fileID: 1917179711}
-  - {fileID: 725100921}
+  - {fileID: 5817171167431796196}
+  - {fileID: 1688921844}

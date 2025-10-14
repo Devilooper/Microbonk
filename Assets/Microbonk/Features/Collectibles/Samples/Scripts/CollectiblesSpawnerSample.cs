@@ -60,21 +60,23 @@ namespace Microbonk.Features.Collectibles.Samples.Scripts
         {
             var ecb = new EntityCommandBuffer(Allocator.Temp);
 
-            var configuration = SystemAPI.GetSingleton<CollectiblesSpawnerSampleData>();
-            Entity entity = SystemAPI.GetSingletonEntity<CollectiblesSpawnerSampleData>();
-
-            var random = new Random(1);
-            for (int i = 0; i < configuration.Amount; i++)
+            foreach (var (configuration, entity) in
+                     SystemAPI.Query<RefRO<CollectiblesSpawnerSampleData>>()
+                         .WithEntityAccess())
             {
-                Entity instance = ecb.Instantiate(configuration.ToSpawn);
-                float angle = random.NextFloat(2 * math.PI);
-                var position = new float3(math.sin(angle), 0, math.cos(angle));
-                position *= random.NextFloat(configuration.Radius);
-                ecb.SetComponent(instance, LocalTransform.FromPosition(position));
+                var random = new Random(1);
+                for (int i = 0; i < configuration.ValueRO.Amount; i++)
+                {
+                    Entity instance = ecb.Instantiate(configuration.ValueRO.ToSpawn);
+                    float angle = random.NextFloat(2 * math.PI);
+                    var position = new float3(math.sin(angle), 0, math.cos(angle));
+                    position *= random.NextFloat(configuration.ValueRO.Radius);
+                    ecb.SetComponent(instance, LocalTransform.FromPosition(position));
+                }
+
+                ecb.RemoveComponent<CollectiblesSpawnerSampleData>(entity);
             }
-
-            ecb.RemoveComponent<CollectiblesSpawnerSampleData>(entity);
-
+            
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
         }
