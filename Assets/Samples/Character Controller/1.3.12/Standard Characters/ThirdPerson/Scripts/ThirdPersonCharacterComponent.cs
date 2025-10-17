@@ -18,6 +18,7 @@ public struct ThirdPersonCharacterComponent : IComponentData
     public float3 Gravity;
     public bool PreventAirAccelerationAgainstUngroundedHits;
     public BasicStepAndSlopeHandlingParameters StepAndSlopeHandling;
+    public byte NonWalkableMaskOverride;
 }
 
 [Serializable]

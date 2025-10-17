@@ -17,8 +17,8 @@ MonoBehaviour:
   - World
   - Player
   - 
-  - 
-  - 
+  - Enemy
+  - Enemy Avoidance
   - 
   - 
   - 

@@ -154,6 +154,9 @@ public readonly partial struct ThirdPersonCharacterAspect : IAspect, IKinematicC
     {
         ThirdPersonCharacterComponent characterComponent = CharacterComponent.ValueRO;
 
+        if ((hit.Material.CustomTags & characterComponent.NonWalkableMaskOverride) != 0)
+            return false;
+
         return CharacterAspect.Default_IsGroundedOnHit(
             in this,
             ref context,
