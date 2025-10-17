@@ -1,14 +1,15 @@
 using Microbonk.Features.Projectiles.Runtime.Components.ProjectileSpawning;
+using Microbonk.Features.Projectiles.Runtime.Systems.ProjectileSpawning;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
-using UnityEngine;
 
 namespace Microbonk.Features.Projectiles.Runtime.Systems
 {
     [BurstCompile]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
     public partial struct ProjectileSpawnerCircularMovementSystem : ISystem
     {
         [ReadOnly] private ComponentLookup<LocalToWorld> targetsPositions;
@@ -43,7 +44,6 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
 
                 var direction = new float3(math.cos(angle - math.PIHALF), 0, math.sin(angle+ math.PIHALF));
                 spawnerTransform.ValueRW.Rotation = quaternion.LookRotation(direction, math.up());
-                
             }
         }
     }

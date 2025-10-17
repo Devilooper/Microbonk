@@ -6,18 +6,20 @@ using Unity.Transforms;
 namespace Microbonk.Features.Projectiles.Runtime.Systems.ProjectileSpawning
 {
     [BurstCompile]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+    [UpdateAfter(typeof(ProjectileSpawnerCircularMovementSystem))]
     public partial struct ProjectileSpawnerSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
+            state.RequireForUpdate<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CircularMovementAroundTransform>();
         }
 
         public void OnUpdate(ref SystemState state)
         {
             var ecbSingleton =
-                SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
+                SystemAPI.GetSingleton<BeginFixedStepSimulationEntityCommandBufferSystem.Singleton>();
             EntityCommandBuffer ecb = ecbSingleton.CreateCommandBuffer(state.WorldUnmanaged);
 
             foreach (var (spawner, cooldown, spawnerTransform) in SystemAPI
