@@ -6,6 +6,8 @@ using Unity.Entities;
 namespace Microbonk.Features.Projectiles.Runtime.Systems
 {
     [BurstCompile]
+    [UpdateInGroup(typeof(FixedStepSimulationSystemGroup))]
+    [UpdateAfter(typeof(ProjectileSpawnerCircularMovementSystem))]
     public partial struct ProjectileMovementSystem : ISystem
     {
         public void OnCreate(ref SystemState state)
