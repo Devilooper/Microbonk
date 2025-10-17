@@ -60,10 +60,10 @@ MonoBehaviour:
     InterpolatePosition: 1
     InterpolateRotation: 0
     EvaluateGrounding: 1
-    SnapToGround: 1
+    SnapToGround: 0
     GroundSnappingDistance: 0.5
     EnhancedGroundPrecision: 0
-    MaxGroundedSlopeAngle: 60
+    MaxGroundedSlopeAngle: 90
     DetectMovementCollisions: 1
     DecollideFromOverlaps: 1
     ProjectVelocityOnInitialOverlaps: 0
@@ -75,7 +75,7 @@ MonoBehaviour:
     SimulateDynamicBody: 1
     Mass: 1
   RotationSharpness: 25
-  GroundMaxSpeed: 10
+  GroundMaxSpeed: 5
   GroundedMovementSharpness: 15
   AirAcceleration: 50
   AirMaxSpeed: 10
@@ -86,6 +86,15 @@ MonoBehaviour:
     y: -30
     z: -0
   PreventAirAccelerationAgainstUngroundedHits: 1
+  NonWalkableOverride:
+    Tag00: 1
+    Tag01: 0
+    Tag02: 0
+    Tag03: 0
+    Tag04: 0
+    Tag05: 0
+    Tag06: 0
+    Tag07: 0
   StepAndSlopeHandling:
     StepHandling: 0
     MaxStepHeight: 0.5
@@ -209,7 +218,7 @@ MonoBehaviour:
         Category01: 0
         Category02: 0
         Category03: 0
-        Category04: 0
+        Category04: 1
         Category05: 0
         Category06: 0
         Category07: 0
@@ -275,7 +284,7 @@ MonoBehaviour:
     m_CustomMaterialTags:
       m_Override: 0
       m_Value:
-        Tag00: 0
+        Tag00: 1
         Tag01: 0
         Tag02: 0
         Tag03: 0
