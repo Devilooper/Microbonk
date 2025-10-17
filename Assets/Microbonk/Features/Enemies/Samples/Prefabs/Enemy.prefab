@@ -103,7 +103,7 @@ MonoBehaviour:
     PreventGroundingWhenMovingTowardsNoGrounding: 0
     HasMaxDownwardSlopeChangeAngle: 0
     MaxDownwardSlopeChangeAngle: 90
-    ConstrainVelocityToGroundPlane: 0
+    ConstrainVelocityToGroundPlane: 1
 --- !u!114 &2721243988995961229
 MonoBehaviour:
   m_ObjectHideFlags: 0

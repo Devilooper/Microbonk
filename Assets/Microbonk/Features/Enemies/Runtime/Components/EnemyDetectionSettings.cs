@@ -3,7 +3,6 @@ using System.Runtime.CompilerServices;
 using Unity.Burst;
 using Unity.Entities;
 using Unity.Physics;
-using Unity.Physics.Authoring;
 
 namespace Microbonk.Features.Enemies.Runtime.Components
 {
