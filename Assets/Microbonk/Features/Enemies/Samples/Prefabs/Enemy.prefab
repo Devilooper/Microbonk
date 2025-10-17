@@ -57,7 +57,7 @@ MonoBehaviour:
       Tag05: 0
       Tag06: 0
       Tag07: 0
-    InterpolatePosition: 1
+    InterpolatePosition: 0
     InterpolateRotation: 0
     EvaluateGrounding: 1
     SnapToGround: 0
@@ -67,25 +67,25 @@ MonoBehaviour:
     DetectMovementCollisions: 1
     DecollideFromOverlaps: 1
     ProjectVelocityOnInitialOverlaps: 0
-    MaxContinuousCollisionsIterations: 8
-    MaxOverlapDecollisionIterations: 2
+    MaxContinuousCollisionsIterations: 4
+    MaxOverlapDecollisionIterations: 1
     DiscardMovementWhenExceedMaxIterations: 1
     KillVelocityWhenExceedMaxIterations: 1
     DetectObstructionsForParentBodyMovement: 0
-    SimulateDynamicBody: 1
+    SimulateDynamicBody: 0
     Mass: 1
   RotationSharpness: 25
   GroundMaxSpeed: 5
   GroundedMovementSharpness: 15
   AirAcceleration: 50
-  AirMaxSpeed: 10
+  AirMaxSpeed: 20
   AirDrag: 0
   JumpSpeed: 10
   Gravity:
     x: -0
     y: -30
     z: -0
-  PreventAirAccelerationAgainstUngroundedHits: 1
+  PreventAirAccelerationAgainstUngroundedHits: 0
   NonWalkableOverride:
     Tag00: 1
     Tag01: 0
@@ -100,10 +100,10 @@ MonoBehaviour:
     MaxStepHeight: 0.5
     ExtraStepChecksDistance: 0.1
     CharacterWidthForStepGroundingCheck: 1
-    PreventGroundingWhenMovingTowardsNoGrounding: 1
+    PreventGroundingWhenMovingTowardsNoGrounding: 0
     HasMaxDownwardSlopeChangeAngle: 0
     MaxDownwardSlopeChangeAngle: 90
-    ConstrainVelocityToGroundPlane: 1
+    ConstrainVelocityToGroundPlane: 0
 --- !u!114 &2721243988995961229
 MonoBehaviour:
   m_ObjectHideFlags: 0
