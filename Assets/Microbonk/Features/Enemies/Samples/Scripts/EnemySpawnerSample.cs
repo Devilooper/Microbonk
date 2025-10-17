@@ -8,9 +8,6 @@ using Random = Unity.Mathematics.Random;
 
 namespace Microbonk.Features.Enemies.Samples.Scripts
 {
-    /// <summary>
-    ///     Editor-exposed configuration of the enemy spawner sample
-    /// </summary>
     public class EnemySpawnerSampleAuthoring : MonoBehaviour
     {
         public GameObject Prefab;
@@ -22,96 +19,67 @@ namespace Microbonk.Features.Enemies.Samples.Scripts
         {
             public override void Bake(EnemySpawnerSampleAuthoring authoring)
             {
-                Entity entityPrefab = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic);
-
-                Entity entity = GetEntity(TransformUsageFlags.Dynamic);
-                uint randomSeed = math.hash(new float3(authoring.MinRadius, authoring.MaxRadius, authoring.MaxEnemiesCount));
-                if (randomSeed == 0u)
+                Entity entity = GetEntity(TransformUsageFlags.None);
+                AddComponent(entity, new EnemySpawner
                 {
-                    randomSeed = 1u;
-                }
-
-                AddComponent(entity, new EnemySpawnerSampleData
-                {
-                    ToSpawn = entityPrefab,
-                    MaxEnemiesCount = math.max(authoring.MaxEnemiesCount, 0),
-                    MinRadius = math.max(0f, authoring.MinRadius),
-                    MaxRadius = math.max(authoring.MinRadius, authoring.MaxRadius),
-                    RandomState = randomSeed
+                    ToSpawn = GetEntity(authoring.Prefab, TransformUsageFlags.Dynamic),
+                    MaxEnemiesCount = authoring.MaxEnemiesCount,
+                    MinRadius = authoring.MinRadius,
+                    MaxRadius = authoring.MaxRadius,
                 });
 
-                AddBuffer<EnemySpawnerSampleTrackedEntity>(entity);
+                AddBuffer<EntitySpawnedBySpawner>(entity);
             }
         }
     }
 
-    /// <summary>
-    ///     Configuration data singleton for enemy spawning
-    /// </summary>
-    public struct EnemySpawnerSampleData : IComponentData
+    public struct EnemySpawner : IComponentData
     {
         public Entity ToSpawn;
         public int MaxEnemiesCount;
         public float MinRadius;
         public float MaxRadius;
-        public uint RandomState;
     }
 
-    /// <summary>
-    ///     Tracks the enemies spawned by a specific spawner
-    /// </summary>
-    public struct EnemySpawnerSampleTrackedEntity : IBufferElementData
+    public struct EntitySpawnedBySpawner : IBufferElementData
     {
         public Entity Value;
     }
 
-    /// <summary>
-    ///     Maintains a target enemy count, spawning replacements when needed
-    /// </summary>
+    [BurstCompile]
     public partial struct EnemySpawnerSampleSystem : ISystem
     {
-        [BurstCompile]
         public void OnCreate(ref SystemState state)
         {
-            state.RequireForUpdate<EnemySpawnerSampleData>();
+            state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
+            state.RequireForUpdate<EnemySpawner>();
         }
 
-        [BurstCompile]
         public void OnUpdate(ref SystemState state)
         {
-            var ecb = new EntityCommandBuffer(Allocator.Temp);
+            var ecbSystem = SystemAPI.GetSingleton<BeginSimulationEntityCommandBufferSystem.Singleton>();
+            EntityCommandBuffer ecb = ecbSystem.CreateCommandBuffer(state.WorldUnmanaged);
             var entityManager = state.EntityManager;
 
             foreach (var (configuration, entity) in
-                     SystemAPI.Query<RefRW<EnemySpawnerSampleData>>()
+                     SystemAPI.Query<RefRO<EnemySpawner>>()
                          .WithEntityAccess())
             {
-                ref var data = ref configuration.ValueRW;
-                if (data.ToSpawn == Entity.Null)
-                {
-                    continue;
-                }
-                
+                DynamicBuffer<EntitySpawnedBySpawner> spawned = entityManager.GetBuffer<EntitySpawnedBySpawner>(entity);
+                TrimDestroyed(spawned, entityManager);
 
-                DynamicBuffer<EnemySpawnerSampleTrackedEntity> buffer = entityManager.GetBuffer<EnemySpawnerSampleTrackedEntity>(entity);
-
-                TrimDestroyed(buffer, entityManager);
-
-                int targetCount = math.max(0, data.MaxEnemiesCount);
-                if (buffer.Length >= targetCount)
+                int maxEnemies = configuration.ValueRO.MaxEnemiesCount;
+                if (spawned.Length >= configuration.ValueRO.MaxEnemiesCount)
                 {
                     continue;
                 }
 
-                int toSpawn = targetCount - buffer.Length;
-                SpawnEnemies(ref data, toSpawn, ref ecb, entity);
+                int toSpawn = maxEnemies - spawned.Length;
+                SpawnEnemies(configuration.ValueRO, toSpawn, ref ecb, entity);
             }
-
-            ecb.Playback(state.EntityManager);
-            ecb.Dispose();
         }
 
-        private static void TrimDestroyed(DynamicBuffer<EnemySpawnerSampleTrackedEntity> buffer, EntityManager entityManager)
+        private static void TrimDestroyed(DynamicBuffer<EntitySpawnedBySpawner> buffer, EntityManager entityManager)
         {
             for (int i = buffer.Length - 1; i >= 0; i--)
             {
@@ -123,25 +91,21 @@ namespace Microbonk.Features.Enemies.Samples.Scripts
             }
         }
 
-        private static void SpawnEnemies(ref EnemySpawnerSampleData data, int count, ref EntityCommandBuffer ecb, Entity spawnerEntity)
+        private static void SpawnEnemies(in EnemySpawner spawner, int count, ref EntityCommandBuffer ecb,
+            Entity spawnerEntity)
         {
-            var random = new Random(data.RandomState == 0u ? 1u : data.RandomState);
-            float minRadius = math.max(0f, data.MinRadius);
-            float maxRadius = math.max(minRadius, data.MaxRadius);
-
+            var random = new Random(seed: 1);
             for (int i = 0; i < count; i++)
             {
-                Entity instance = ecb.Instantiate(data.ToSpawn);
-                float angle = random.NextFloat(2 * math.PI);
-                float radius = maxRadius <= minRadius
-                    ? minRadius
-                    : random.NextFloat(minRadius, maxRadius);
-                var position = new float3(math.sin(angle) * radius, 0f, math.cos(angle) * radius);
-                ecb.SetComponent(instance, LocalTransform.FromPosition(position));
-                ecb.AppendToBuffer(spawnerEntity, new EnemySpawnerSampleTrackedEntity { Value = instance });
-            }
+                Entity instance = ecb.Instantiate(spawner.ToSpawn);
 
-            data.RandomState = random.NextUInt();
+                float angle = random.NextFloat(2 * math.PI);
+                float radius = random.NextFloat(spawner.MinRadius, spawner.MaxRadius);
+                var position = new float3(math.sin(angle) * radius, 0f, math.cos(angle) * radius);
+
+                ecb.SetComponent(instance, LocalTransform.FromPosition(position));
+                ecb.AppendToBuffer(spawnerEntity, new EntitySpawnedBySpawner { Value = instance });
+            }
         }
     }
 }

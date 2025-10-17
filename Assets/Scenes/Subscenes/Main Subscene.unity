@@ -736,6 +736,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: OrbitCamera
       objectReference: {fileID: 0}
+    - target: {fileID: 7712158183226850643, guid: 89a4330ffef6bc54988895ff3f19bc60, type: 3}
+      propertyPath: ObstructionRadius
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712158183226850643, guid: 89a4330ffef6bc54988895ff3f19bc60, type: 3}
+      propertyPath: IgnoredEntities.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7712158183226850643, guid: 89a4330ffef6bc54988895ff3f19bc60, type: 3}
+      propertyPath: 'IgnoredEntities.Array.data[0]'
+      value: 
+      objectReference: {fileID: 1399080445371383571, guid: 2a3444afc20d7de4da3ea8f18e1be77d, type: 3}
     - target: {fileID: 8816398634880850559, guid: 89a4330ffef6bc54988895ff3f19bc60, type: 3}
       propertyPath: m_LocalPosition.x
       value: -4.62383
