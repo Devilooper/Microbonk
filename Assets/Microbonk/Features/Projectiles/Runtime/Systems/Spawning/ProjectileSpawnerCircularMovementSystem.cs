@@ -18,7 +18,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
         {
             new CircularMovementJob
             {
-                ElapsedTime = SystemAPI.Time.ElapsedTime,
+                ElapsedTime = (float)SystemAPI.Time.ElapsedTime,
                 OriginPositions = SystemAPI.GetComponentLookup<LocalToWorld>(true)
             }.ScheduleParallel();
         }

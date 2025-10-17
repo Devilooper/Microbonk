@@ -10,7 +10,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
     [BurstCompile]
     public partial struct CircularMovementJob : IJobEntity
     {
-        public double ElapsedTime;
+        public float ElapsedTime;
 
         [ReadOnly]
         public ComponentLookup<LocalToWorld> OriginPositions;
@@ -20,7 +20,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
             var speed = spawner.AngularSpeed;
             var radius = spawner.Radius;
             var origin = this.OriginPositions[spawner.Origin].Position;
-            var angle = (float)this.ElapsedTime * speed;
+            var angle = this.ElapsedTime * speed;
 
             var position = new float3(
                 origin.x + math.sin(angle) * radius,
