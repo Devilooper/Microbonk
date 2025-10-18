@@ -48,6 +48,8 @@ namespace Microbonk.Features.Enemies.Samples.Scripts
     [BurstCompile]
     public partial struct EnemySpawnerSampleSystem : ISystem
     {
+        private static Random Random = new (1);
+        
         public void OnCreate(ref SystemState state)
         {
             state.RequireForUpdate<BeginSimulationEntityCommandBufferSystem.Singleton>();
@@ -93,13 +95,12 @@ namespace Microbonk.Features.Enemies.Samples.Scripts
         private static void SpawnEnemies(in EnemySpawner spawner, int count, ref EntityCommandBuffer ecb,
             Entity spawnerEntity)
         {
-            var random = new Random(1);
             for (int i = 0; i < count; i++)
             {
                 Entity instance = ecb.Instantiate(spawner.ToSpawn);
 
-                float angle = random.NextFloat(2 * math.PI);
-                float radius = random.NextFloat(spawner.MinRadius, spawner.MaxRadius);
+                float angle = Random.NextFloat(2 * math.PI);
+                float radius = Random.NextFloat(spawner.MinRadius, spawner.MaxRadius);
                 var position = new float3(math.sin(angle) * radius, 0f, math.cos(angle) * radius);
 
                 ecb.SetComponent(instance, LocalTransform.FromPosition(position));
