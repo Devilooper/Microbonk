@@ -15,6 +15,7 @@ namespace Microbonk.Features.Projectiles.Authoring
             public override void Bake(ProjectileAuthoring authoring)
             {
                 Entity entity = GetEntity(TransformUsageFlags.Dynamic);
+                AddComponent(entity, new ProjectileTag());
                 AddComponent(entity, new ProjectileSpeed
                 {
                     Speed = authoring.speed,
