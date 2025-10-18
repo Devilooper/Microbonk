@@ -1,8 +1,8 @@
 using Microbonk.Features.Enemies.Runtime.Components;
-using UnityEngine;
 using Unity.Entities;
 using Unity.Physics;
 using Unity.Physics.Authoring;
+using UnityEngine;
 
 namespace Microbonk.Features.Enemies.Authoring
 {

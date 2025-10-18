@@ -27,7 +27,7 @@ namespace Microbonk.Features.Collectibles.Runtime.Jobs
             float3 targetPos = this.TargetPositions[homingTarget.Target].Position;
             float3 d = targetPos - collectibleTransform.Position;
             float dist = math.length(d);
-            
+
             // Handle collection
             bool isWithinCompleteRadius = dist <= this.CompleteRadius || dist <= 1e-6f;
             if (isWithinCompleteRadius)

@@ -22,7 +22,7 @@ namespace Microbonk.Features.ProjectilesEnemiesInteractions.Runtime.Systems
         {
             var projectiles = SystemAPI.GetComponentLookup<ProjectileTag>(true);
             var transforms = SystemAPI.GetComponentLookup<LocalTransform>(true);
-            
+
             var simulationSingleton = SystemAPI.GetSingleton<SimulationSingleton>();
             var endSim = state.World.GetOrCreateSystemManaged<EndFixedStepSimulationEntityCommandBufferSystem>();
 

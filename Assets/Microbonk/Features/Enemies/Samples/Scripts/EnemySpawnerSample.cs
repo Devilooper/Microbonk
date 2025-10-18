@@ -1,5 +1,4 @@
 using Unity.Burst;
-using Unity.Collections;
 using Unity.Entities;
 using Unity.Mathematics;
 using Unity.Transforms;
@@ -94,7 +93,7 @@ namespace Microbonk.Features.Enemies.Samples.Scripts
         private static void SpawnEnemies(in EnemySpawner spawner, int count, ref EntityCommandBuffer ecb,
             Entity spawnerEntity)
         {
-            var random = new Random(seed: 1);
+            var random = new Random(1);
             for (int i = 0; i < count; i++)
             {
                 Entity instance = ecb.Instantiate(spawner.ToSpawn);

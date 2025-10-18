@@ -1,5 +1,4 @@
 using Microbonk.Features.Collectibles.Runtime.Components;
-using Microbonk.Features.Collectibles.Runtime.Components.Homing;
 using Unity.Burst;
 using Unity.Collections;
 using Unity.Entities;

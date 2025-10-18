@@ -12,8 +12,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
     {
         public float ElapsedTime;
 
-        [ReadOnly]
-        public ComponentLookup<LocalToWorld> OriginPositions;
+        [ReadOnly] public ComponentLookup<LocalToWorld> OriginPositions;
 
         private void Execute(ref LocalTransform spawnerTransform, in CircularMovementAroundTransform spawner)
         {
@@ -33,7 +32,7 @@ namespace Microbonk.Features.Projectiles.Runtime.Systems
                 0,
                 math.sin(angle + math.PIHALF));
             var rotation = quaternion.LookRotation(direction, math.up());
-            
+
             spawnerTransform = LocalTransform.FromPositionRotation(position, rotation);
         }
     }

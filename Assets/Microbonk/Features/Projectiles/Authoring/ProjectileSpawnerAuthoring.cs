@@ -23,11 +23,10 @@ namespace Microbonk.Features.Projectiles.Authoring
                     AngularSpeed = authoring.SpawnerAngularSpeed,
                     Radius = authoring.SpawnerRadius
                 });
-                AddComponent(entity, new ProjectileSpawner()
+                AddComponent(entity, new ProjectileSpawner
                 {
                     ToSpawn = GetEntity(authoring.ProjectileToSpawn, TransformUsageFlags.Dynamic),
                     SpawnIntervalSeconds = authoring.IntervalSeconds
-                    
                 });
                 AddComponent(entity, new SpawnerCooldown
                 {

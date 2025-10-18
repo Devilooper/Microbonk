@@ -76,7 +76,7 @@ namespace Microbonk.Features.Collectibles.Samples.Scripts
 
                 ecb.RemoveComponent<CollectiblesSpawnerSampleData>(entity);
             }
-            
+
             ecb.Playback(state.EntityManager);
             ecb.Dispose();
         }

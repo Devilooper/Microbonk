@@ -13,14 +13,14 @@ namespace Microbonk.Features.Collectibles.Runtime.Systems
     {
         private EntityQuery homingTargetsQuery;
         [ReadOnly] private ComponentLookup<LocalToWorld> targetsPositions;
-        
+
         public void OnCreate(ref SystemState state)
         {
             this.homingTargetsQuery = new EntityQueryBuilder(Allocator.Temp)
                 .WithAll<HomingTargetTag, LocalToWorld>()
                 .Build(ref state);
 
-            this.targetsPositions = state.GetComponentLookup<LocalToWorld>(isReadOnly: true);
+            this.targetsPositions = state.GetComponentLookup<LocalToWorld>(true);
 
             state.RequireForUpdate<EndSimulationEntityCommandBufferSystem.Singleton>();
             state.RequireForUpdate<CollectibleHomingSettingsSingleton>();
