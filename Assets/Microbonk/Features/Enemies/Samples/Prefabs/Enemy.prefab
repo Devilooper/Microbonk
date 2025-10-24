@@ -79,7 +79,7 @@ MonoBehaviour:
   GroundMaxSpeed: 5
   GroundedMovementSharpness: 15
   AirAcceleration: 50
-  AirMaxSpeed: 20
+  AirMaxSpeed: 5
   AirDrag: 0
   JumpSpeed: 10
   Gravity:
@@ -205,8 +205,8 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
-        CombineMode: 0
+        Value: 0
+        CombineMode: 1
     m_Restitution:
       m_Override: 0
       m_Value:
@@ -559,8 +559,8 @@ MonoBehaviour:
     m_Friction:
       m_Override: 0
       m_Value:
-        Value: 0.5
-        CombineMode: 0
+        Value: 0
+        CombineMode: 1
     m_Restitution:
       m_Override: 0
       m_Value:
