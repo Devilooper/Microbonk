@@ -15,9 +15,3 @@ This demo runs at 70+ FPS with ~1000 enemies, ~10000 collectibles, ~100 projecti
 This repo also showcases:
 - How to write tests for DOTS code, with two sample PlayMode tests that run inside ECS world 
 - GitHub CI that executes and reports these tests
-
-## Will not implement
-These are not supported by DOTS natively and would require writing supplementary MonoBehaviours; this repo aims to be a sample of ECS only
-- Sounds
-- Animations
-- UI
